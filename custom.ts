@@ -3,7 +3,8 @@
 namespace Cpe {
 
     // ฟังก์ชันช่วยแปลงค่าจากช่วงหนึ่งไปยังอีกช่วง
-    function mapValue(value: number, fromLow: number, fromHigh: number, toLow: number, toHigh: number): number {
+    //% blockId="cpe_map_value" block="map value %value | from range %fromLow-%fromHigh to %toLow-%toHigh"
+    export function mapValue(value: number, fromLow: number, fromHigh: number, toLow: number, toHigh: number): number {
         return toLow + (toHigh - toLow) * ((value - fromLow) / (fromHigh - fromLow));
     }
 
