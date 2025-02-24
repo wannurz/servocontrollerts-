@@ -47,6 +47,8 @@ namespace Cpe {
     // ฟังก์ชันควบคุมเซอร์โว
     //% blockId="cpe_servo" block="set servo %servo | angle %degree | range %range"
     //% degree.min=0 degree.max=180
+    //% range.defl="0-180"
+    //% expandableArgumentMode="toggle"
     export function Servo(servo: "SV1" | "SV2", degree: number, range: "0-90" | "0-180"): void {
         let pin: AnalogPin;
         if (servo === "SV1") {
