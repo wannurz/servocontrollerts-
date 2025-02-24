@@ -3,16 +3,16 @@
 namespace Cpe {
 
     // ฟังก์ชันช่วยแปลงค่าจากช่วงหนึ่งไปยังอีกช่วง
-    //% blockId="cpe_map_value" block="map value %value|from range %fromLow|-%fromHigh|to %toLow|-%toHigh"
-    //% inlineInputMode=inline
+    //% blockId="cpe_map_value" block="map value %value from range %fromLow-%fromHigh to %toLow-%toHigh"
+    //% inlineInputMode=external
     export function mapValue(value: number, fromLow: number, fromHigh: number, toLow: number, toHigh: number): number {
         return toLow + (toHigh - toLow) * ((value - fromLow) / (fromHigh - fromLow));
     }
 
     // ฟังก์ชันควบคุมมอเตอร์
-    //% blockId="cpe_motor" block="motor %motor|speed %speed"
+    //% blockId="cpe_motor" block="motor %motor speed %speed"
     //% speed.min=0 speed.max=100
-    //% inlineInputMode=inline
+    //% inlineInputMode=external
     export function Motor(motor: "Forward" | "Backward", speed: number): void {
         const motorspeed = mapValue(speed, 0, 100, 0, 1023);
         if (motor === "Forward") {
@@ -29,9 +29,9 @@ namespace Cpe {
     }
 
     // ฟังก์ชันควบคุมการหมุน
-    //% blockId="cpe_turn" block="turn %direction|speed %speed"
+    //% blockId="cpe_turn" block="turn %direction speed %speed"
     //% speed.min=0 speed.max=100
-    //% inlineInputMode=inline
+    //% inlineInputMode=external
     export function Turn(direction: "Left" | "Right", speed: number): void {
         const motorspeed = mapValue(speed, 0, 100, 0, 1023);
         if (direction === "Left") {
@@ -57,11 +57,11 @@ namespace Cpe {
     }
 
     // ฟังก์ชันควบคุมเซอร์โว
-    //% blockId="cpe_servo" block="set servo %servo|angle %degree|range %range"
+    //% blockId="cpe_servo" block="set servo %servo angle %degree range %range"
     //% degree.min=0 degree.max=180
     //% range.defl="0-180"
     //% expandableArgumentMode="toggle"
-    //% inlineInputMode=inline
+    //% inlineInputMode=external
     export function Servo(servo: "SV1" | "SV2", degree: number, range: "0-90" | "0-180"): void {
         let pin: AnalogPin = servo === "SV1" ? AnalogPin.P8 : AnalogPin.P12;
         let mappedDegree = Math.max(0, Math.min(range === "0-90" ? 90 : 180, degree));
