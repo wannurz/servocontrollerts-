@@ -2,7 +2,7 @@
 //% block="Cpe Controller"
 namespace Cpe {
 
-    // ฟังก์ชันช่วยแปลงค่า (map) จากช่วงหนึ่งไปยังอีกช่วง
+    // ฟังก์ชันช่วยแปลงค่าจากช่วงหนึ่งไปยังอีกช่วง
     function mapValue(value: number, fromLow: number, fromHigh: number, toLow: number, toHigh: number): number {
         return toLow + (toHigh - toLow) * ((value - fromLow) / (fromHigh - fromLow));
     }
@@ -11,7 +11,7 @@ namespace Cpe {
     //% blockId="cpe_motor" block="motor %motor | speed %speed"
     //% speed.min=0 speed.max=100
     export function Motor(motor: "Forward" | "Backward", speed: number): void {
-        const motorspeed = mapValue(speed, 0, 100, 0, 1023);
+        const motorspeed = mapValue(speed, 0, 100, 0, 1023); // ใช้ mapValue แทน Math.map
         if (motor === "Forward") {
             pins.digitalWritePin(DigitalPin.P13, 1);
             pins.analogWritePin(AnalogPin.P14, motorspeed);
@@ -29,7 +29,7 @@ namespace Cpe {
     //% blockId="cpe_turn" block="turn %direction | speed %speed"
     //% speed.min=0 speed.max=100
     export function Turn(direction: "Left" | "Right", speed: number): void {
-        const motorspeed = mapValue(speed, 0, 100, 0, 1023);
+        const motorspeed = mapValue(speed, 0, 100, 0, 1023); // ใช้ mapValue แทน Math.map
         if (direction === "Left") {
             pins.digitalWritePin(DigitalPin.P13, 1);
             pins.analogWritePin(AnalogPin.P14, 0);
@@ -66,7 +66,7 @@ namespace Cpe {
         }
 
         // จำกัดองศาตามช่วงที่กำหนด
-        let mappedDegree = Math.constrain(degree, 0, range === "0-90" ? 90 : 180);
+        let mappedDegree = Math.max(0, Math.min(range === "0-90" ? 90 : 180, degree));
 
         // ควบคุมเซอร์โว
         pins.servoWritePin(pin, mappedDegree);
